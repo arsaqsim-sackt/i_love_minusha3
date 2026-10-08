@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Для моей Кошечки</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap">
+<style>
+:root{
+  --cream:#fff6ef; --pink:#ffd3de; --rose:#ff8fab; --deep:#e05780; --peach:#ffd9bf; --lilac:#e3d4ff; --ink:#6b3a4e;
+  --font:"Fredoka","Nunito","Trebuchet MS","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:var(--font);color:var(--ink);font-size:1.1rem;line-height:1.6;
+  background:
+    radial-gradient(circle at 15% 10%,var(--lilac) 0 9rem,transparent 9.1rem),
+    radial-gradient(circle at 90% 85%,var(--peach) 0 11rem,transparent 11.1rem),
+    var(--cream);
+  background-attachment:fixed;
+}
+main{max-width:32rem;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:1.2rem 1.2rem 1.6rem}
+.stage{display:none;flex:1;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:1.5rem 0}
+.stage.on{display:flex;animation:pop .5s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+h1{font-size:clamp(2.3rem,10vw,3.3rem);line-height:1.1;margin:.6rem 0;color:var(--deep);font-weight:600}
+h2{font-size:1.8rem;line-height:1.2;margin:0 0 .8rem;color:var(--deep);font-weight:600}
+p{margin:0 0 .9rem}
+.hint{font-size:.95rem;opacity:.75}
+svg.cat{width:9rem;height:auto;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-2deg)}}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:100%;margin:.8rem 0}
+.card{border:0;font:inherit;color:var(--ink);background:var(--pink);border-radius:1.4rem;padding:1rem .6rem;min-height:5.6rem;cursor:pointer;box-shadow:0 4px 0 #f3a9bb;transition:transform .15s}
+.card:active{transform:translateY(3px);box-shadow:0 1px 0 #f3a9bb}
+.card b{display:block;font-size:1.15rem;color:var(--deep);font-weight:600}
+.card span{display:none;font-size:.9rem}
+.card.open{background:var(--cream);box-shadow:0 4px 0 var(--lilac);border:2px dashed var(--rose)}
+.card.open span{display:block}
+.coupon.open b{text-decoration:none}
+#game{position:relative;width:100%;height:14rem;border-radius:1.6rem;background:var(--lilac);overflow:hidden;margin:.6rem 0 .4rem;touch-action:manipulation}
+#game button{position:absolute;border:0;background:none;font-size:2rem;cursor:pointer;padding:0;line-height:1;animation:fl 2.4s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px)}}
+#score{font-weight:600;color:var(--deep);font-size:1.3rem}
+.letter{background:#fff;border-radius:1.6rem;padding:1.3rem 1.2rem;box-shadow:0 6px 0 var(--pink);text-align:left}
+nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.8rem}
+button.nb{font:inherit;font-weight:500;border:0;border-radius:2rem;padding:.7rem 1.4rem;cursor:pointer;background:var(--lilac);color:var(--ink)}
+button.nb.go{background:var(--rose);color:#fff;box-shadow:0 4px 0 var(--deep)}
+button.nb.go:active{transform:translateY(3px);box-shadow:0 1px 0 var(--deep)}
+button.nb[hidden]{visibility:hidden;display:inline-block}
+button:focus-visible{outline:3px solid var(--deep);outline-offset:2px}
+.dots{display:flex;gap:.4rem}
+.dots i{width:.6rem;height:.6rem;border-radius:50%;background:var(--pink)}
+.dots i.on{background:var(--deep);transform:scale(1.3)}
+.heart{position:fixed;pointer-events:none;font-size:1.6rem;animation:up 1.6s ease-out forwards;z-index:9}
+@keyframes up{to{transform:translateY(-14rem) scale(1.3);opacity:0}}
+@media (prefers-reduced-motion:reduce){.stage.on,svg.cat,#game button,.heart{animation:none}}
+</style>
+</head>
+<body>
+<main>
+
+<section class="stage on" aria-label="Привет">
+  <svg class="cat" viewBox="0 0 120 110" aria-hidden="true">
+    <path d="M18 50 L22 12 L50 32 Z" fill="#ffc2d1" stroke="#6b3a4e" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M102 50 L98 12 L70 32 Z" fill="#ffc2d1" stroke="#6b3a4e" stroke-width="4" stroke-linejoin="round"/>
+    <ellipse cx="60" cy="64" rx="46" ry="38" fill="#fff" stroke="#6b3a4e" stroke-width="4"/>
+    <circle cx="42" cy="60" r="5" fill="#6b3a4e"/><circle cx="78" cy="60" r="5" fill="#6b3a4e"/>
+    <ellipse cx="32" cy="74" rx="8" ry="5" fill="#ffb3c6"/><ellipse cx="88" cy="74" rx="8" ry="5" fill="#ffb3c6"/>
+    <path d="M54 70 Q60 78 66 70" fill="none" stroke="#6b3a4e" stroke-width="4" stroke-linecap="round"/>
+    <path d="M57 66 h6 l-3 4 z" fill="#ff8fab"/>
+  </svg>
+  <h1>Привет, Принцесса</h1>
+  <p>Этот сайт сделан только для одной очень любимой Кошечки.</p>
+  <p class="hint">Жми «Дальше». Тут будет мило.</p>
+</section>
+
+<section class="stage" aria-label="Имена">
+  <h2>Все твои имена</h2>
+  <p class="hint">Нажми на каждое.</p>
+  <div class="grid">
+    <button class="card"><b>Кошечка</b><span>Самая мягкая, тёплая и любимая</span></button>
+    <button class="card"><b>Минушенок</b><span>Маленькое счастье, которое хочется обнять</span></button>
+    <button class="card"><b>Писюшка</b><span>Звучит смешно, а на самом деле нежно</span></button>
+    <button class="card"><b>Масяся</b><span>Когда хочется сюсюкать без причины</span></button>
+    <button class="card"><b>Принцесса</b><span>Потому что ты заслуживаешь всего лучшего</span></button>
+    <button class="card"><b>Сюсюшка</b><span>Для самых ласковых моментов</span></button>
+  </div>
+</section>
+
+<section class="stage" aria-label="Купоны">
+  <h2>Купончики для тебя</h2>
+  <p class="hint">Нажми, чтобы открыть. Это просто приятные мелочи, без обязательств.</p>
+  <div class="grid">
+    <button class="card coupon"><b>Тёплые обнимашки</b><span>Когда захочешь и сколько захочешь</span></button>
+    <button class="card coupon"><b>Чай с пледом</b><span>Я просто посижу рядом, если нужно</span></button>
+    <button class="card coupon"><b>Выбор за тобой</b><span>Фильм, еда, музыка: решаешь ты</span></button>
+    <button class="card coupon"><b>Десять комплиментов</b><span>Каждый абсолютно честный</span></button>
+    <button class="card coupon"><b>Тишина и покой</b><span>Вечер, где тебя никто ни о чём не просит</span></button>
+    <button class="card coupon"><b>Сюрприз</b><span>Небольшой, но от всей души</span></button>
+    <button class="card coupon"><b>Мемчики и котики</b><span>Целая пачка, чтобы улыбнуться</span></button>
+    <button class="card coupon"><b>Неспешная прогулка</b><span>Без плана, куда ты захочешь</span></button>
+  </div>
+</section>
+
+<section class="stage" aria-label="Погладь">
+  <h2>Погладь Кошечку</h2>
+  <p class="hint">Нажимай, она любит.</p>
+  <button class="card" id="pet" style="font-size:5rem;line-height:1;padding:1rem 2rem;min-height:0" aria-label="Погладить кошечку">🐱</button>
+  <p id="purr" style="margin-top:1rem;font-weight:500">Мур?</p>
+</section>
+
+<section class="stage" aria-label="Причины">
+  <h2>Почему ты такая классная</h2>
+  <p class="hint">Жми, и выпадет новая причина.</p>
+  <div class="letter" id="reason" style="width:100%;min-height:6rem;display:flex;align-items:center;justify-content:center;text-align:center">Ты просто есть, и это уже чудесно.</div>
+  <button class="nb go" id="why" style="margin-top:1.1rem">Ещё причина</button>
+</section>
+
+<section class="stage" aria-label="Настроение">
+  <h2>Какое у тебя настроение?</h2>
+  <p class="hint">Выбери, и я скажу пару слов.</p>
+  <div class="grid" style="grid-template-columns:1fr">
+    <button class="card mood" data-m="a"><b>Бодрое</b></button>
+    <button class="card mood" data-m="b"><b>Усталое</b></button>
+    <button class="card mood" data-m="c"><b>Хочется тишины</b></button>
+    <button class="card mood" data-m="d"><b>Хочется ласки</b></button>
+  </div>
+  <p id="moodans" style="min-height:4rem;font-weight:500"></p>
+</section>
+
+<section class="stage" aria-label="Игра">
+  <h2>Поймай сердечки</h2>
+  <p class="hint">Тапни по всем, пока они не улетели.</p>
+  <div id="game" aria-label="Игровое поле"></div>
+  <p id="score">Поймано: 0 из 12</p>
+  <button class="nb" id="again" hidden>Ещё раз</button>
+</section>
+
+<section class="stage" aria-label="Тебе">
+  <h2>Моей Кошечке</h2>
+  <div class="letter">
+    <p>Ты светлая, добрая и очень настоящая. Рядом с тобой хочется быть лучше.</p>
+    <p>Мне нравится твоя улыбка, твой смех и то, как ты умеешь заботиться о других. Надеюсь, ты и о себе заботишься так же.</p>
+    <p>Что бы ни происходило, знай: ты очень любима. И я хочу, чтобы ты улыбалась как можно чаще.</p>
+    <p><b>Люблю тебя, Минушенька.</b></p>
+  </div>
+  <button class="nb go" id="love" style="margin-top:1.1rem">Отправить сердечки</button>
+</section>
+
+<nav>
+  <button class="nb" id="back" hidden>Назад</button>
+  <div class="dots" id="dots" aria-hidden="true"></div>
+  <button class="nb go" id="next">Дальше</button>
+</nav>
+</main>
+
+<script>
+const stages=[...document.querySelectorAll('.stage')];
+const dots=document.getElementById('dots'),back=document.getElementById('back'),next=document.getElementById('next');
+stages.forEach(()=>dots.appendChild(document.createElement('i')));
+let i=0;
+function show(n){
+  i=Math.max(0,Math.min(stages.length-1,n));
+  stages.forEach((s,k)=>s.classList.toggle('on',k===i));
+  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+  back.hidden=i===0; next.hidden=i===stages.length-1;
+  if(stages[i].getAttribute('aria-label')==='Игра')startGame();
+  window.scrollTo({top:0});
+}
+back.onclick=()=>show(i-1); next.onclick=()=>show(i+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
+
+document.querySelectorAll('.card:not(#pet):not(.mood)').forEach(c=>c.onclick=()=>c.classList.toggle('open'));
+
+let pets=0;
+const purrs=[[1,'Мур!'],[5,'Мурррр~'],[12,'Она уже громко мурлычет'],[25,'Она растаяла и стала лужицей любви'],[40,'Всё, ты лучший гладильщик на свете']];
+document.getElementById('pet').onclick=e=>{
+  pets++;burst(e.clientX,e.clientY);
+  const p=purrs.filter(x=>pets>=x[0]).pop();
+  document.getElementById('purr').textContent=p[1]+' ('+pets+')';
+};
+const reasons=['У тебя самая тёплая улыбка','Ты умеешь заботиться о других','Рядом с тобой спокойно','Ты очень красивая, и снаружи, и внутри','Ты смешная, когда сама этого не замечаешь','Ты сильная, даже когда устала','Ты замечаешь мелочи, которые другие пропускают','У тебя добрые глаза','Ты умеешь радоваться маленьким вещам','Ты настоящая, без масок','Ты работаешь и стараешься каждый день','Твой смех заразителен','Ты заслуживаешь отдыха и нежности','С тобой хочется быть лучше'];
+let ri=-1;
+document.getElementById('why').onclick=e=>{
+  let n;do{n=Math.floor(Math.random()*reasons.length)}while(n===ri);ri=n;
+  document.getElementById('reason').textContent=reasons[n];burst(e.clientX,e.clientY,3);
+};
+const moods={
+  a:'Класс! Тогда пусть день будет ещё лучше. Ты это заслужила.',
+  b:'Тогда сегодня можно ничего не доказывать. Попей тёплого, посиди спокойно, ты и так молодец.',
+  c:'Пусть будет тихо. Ты ни перед кем не обязана быть «в порядке» прямо сейчас.',
+  d:'Тогда лови виртуальные обнимашки: 🤗🤗🤗 Они тёплые и без срока годности.'
+};
+document.querySelectorAll('.mood').forEach(b=>b.onclick=()=>{document.getElementById('moodans').textContent=moods[b.dataset.m]});
+
+function burst(x,y,n=1){
+  const em=['💗','💖','🩷','🐱','✨'];
+  for(let k=0;k<n;k++){
+    const h=document.createElement('div');h.className='heart';
+    h.textContent=em[Math.floor(Math.random()*em.length)];
+    h.style.left=(x+(Math.random()*60-30))+'px';h.style.top=y+'px';
+    document.body.appendChild(h);setTimeout(()=>h.remove(),1700);
+  }
+}
+const game=document.getElementById('game'),score=document.getElementById('score'),again=document.getElementById('again');
+const TOTAL=12;let caught=0;
+function startGame(){
+  game.innerHTML='';caught=0;again.hidden=true;score.textContent='Поймано: 0 из '+TOTAL;
+  for(let k=0;k<TOTAL;k++){
+    const b=document.createElement('button');b.textContent=['💗','💖','🩷'][k%3];b.setAttribute('aria-label','сердечко');
+    b.style.left=(4+Math.random()*82)+'%';b.style.top=(4+Math.random()*78)+'%';
+    b.style.animationDelay=(-Math.random()*2.4)+'s';
+    b.onclick=e=>{
+      b.remove();caught++;burst(e.clientX,e.clientY);
+      score.textContent=caught===TOTAL?'Ты поймала все! Ты лучшая 💞':'Поймано: '+caught+' из '+TOTAL;
+      if(caught===TOTAL)again.hidden=false;
+    };
+    game.appendChild(b);
+  }
+}
+again.onclick=startGame;
+document.getElementById('love').onclick=e=>burst(e.clientX,e.clientY,10);
+show(0);
+</script>
+</body>
+</html>
